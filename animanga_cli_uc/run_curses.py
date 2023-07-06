@@ -1,4 +1,5 @@
 import curses
+from . import jikan_calls
 
 def redrawMenu(stdscr, menuContents, selectedMenu):
     #Print menu
