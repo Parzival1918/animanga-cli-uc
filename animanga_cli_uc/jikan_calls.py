@@ -1,0 +1,1 @@
+#Handle calling Jikan API
