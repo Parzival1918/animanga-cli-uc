@@ -18,7 +18,7 @@ def get_input(question: str = "Search query: "):
     print(TextColour.BOLD + TextColour.YELLOW + question + TextColour.END, end='')
     return input()
 
-def main():
+def main(args):
     userInput = get_input()
     results = jikan_calls.searchAnime(userInput)
     print(results)
