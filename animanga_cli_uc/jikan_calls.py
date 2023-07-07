@@ -8,13 +8,17 @@ jikan = jikanpy.Jikan()
 def search(callpath: str, query: str, page=1):
     return jikan.search(callpath, query, page=page)
 
-def seasonal(callpath: str):
+def seasonal(callpath: str, year: int = None, season: str = None):
     if callpath == 'anime':
 
         results = []
         page = 1
         while True:
-            result = jikan.seasons(extension='now', page=page)
+            if year is None and season is None:
+                result = jikan.seasons(extension='now', page=page)
+            else:
+                result = jikan.seasons(year=year, season=season, page=page)
+                
             results.append(result)
             if not result['pagination']['has_next_page']:
                break

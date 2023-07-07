@@ -41,16 +41,27 @@ def print_info(data: dict):
         print() #newline
 
 def anime(args):
-    if args.query:
-        query = args.query
+    if args.which == 'anime/search':
+        query = args.search
         results = jikan_calls.search(callpath='anime', query=query)
         print(results)
-    elif args.seasonal:
-        results = jikan_calls.seasonal(callpath='anime')
+    elif args.which == 'anime/seasonal':
+        if args.current and (args.year or args.season):
+            raise ValueError('Cannot specify year or season when using --current.')
+
+        if args.current:
+            results = jikan_calls.seasonal(callpath='anime')
+        else:
+            year = args.year
+            season = args.season
+            results = jikan_calls.seasonal(callpath='anime',
+                                            year=year,
+                                            season=season)
+        
         print_info(results)
 
 def main(args):
-    if args.which == 'anime':
+    if args.which.startswith('anime'):
         anime(args)
     else:
         pass
