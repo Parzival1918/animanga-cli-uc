@@ -29,3 +29,6 @@ def seasonal(callpath: str, year: int = None, season: str = None):
             page += 1
 
         return results
+    
+def random(type: str):
+    return jikan.call(type=type)
