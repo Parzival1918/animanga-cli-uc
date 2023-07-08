@@ -69,7 +69,7 @@ def main():
     #parse
     args = parser.parse_args()
 
-    print(args)
+    # print(args)
 
     run_cli.main(args=args)
 

@@ -6,7 +6,7 @@ import time
 jikan = jikanpy.Jikan()
 
 def search(callpath: str, query: str, page=1):
-    return jikan.search(callpath, query, page=page)
+    return [jikan.search(callpath, query, page=page)]
 
 def seasonal(callpath: str, year: int = None, season: str = None):
     if callpath == 'anime':
