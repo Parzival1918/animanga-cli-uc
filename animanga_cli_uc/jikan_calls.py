@@ -5,6 +5,8 @@ import time
 
 jikan = jikanpy.Jikan()
 
+# MUST HANDLE PAGINATION WITHOUT GOING OVER RATE LIMIT
+
 def search(callpath: str, query: str, page=1):
     return [jikan.search(callpath, query, page=page)]
 
@@ -31,4 +33,10 @@ def seasonal(callpath: str, year: int = None, season: str = None):
         return results
     
 def random(type: str):
-    return jikan.call(type=type)
+    return jikan.random(type=type)
+
+def schedule(day: str):
+    return [jikan.schedules(day="day", parameters={'filter': day})] # Does not seem to get the day you ask for
+
+def top(type: str, filter: str = None):
+    return [jikan.top(type=type, parameters={'type': filter})]

@@ -4,7 +4,7 @@ def main():
     from . import run_cli
 
     #parser
-    parser = argparse.ArgumentParser(description='Search for anime and manga using the command line.', prog='animanga')
+    parser = argparse.ArgumentParser(description='Search for anime and manga using the command line.', prog='animanga', epilog='by Pedro Juan Royo')
     subparsers = parser.add_subparsers(help='sub-command help', required=True)
 
     #arguments
@@ -15,11 +15,12 @@ def main():
 
     parser_A_query = subparser_A.add_parser('search', help='Search anime by name.')
     parser_A_query.set_defaults(which='anime/search')
-    parser_A_query.add_argument('-q', '--query', help='Search query.')
+    parser_A_query.add_argument('query', help='Search query.')
+    parser_A_query.add_argument('-a', '--amount', help='Amount of results. Default 3', type=int, default=3)
 
     parser_A_seasonal = subparser_A.add_parser('seasonal', help='Fetch seasonal anime by year and season.')
     parser_A_seasonal.set_defaults(which='anime/seasonal')
-    parser_A_seasonal.add_argument('--current', help='Anime from current season', action='store_true')
+    # parser_A_seasonal.add_argument('--current', help='Anime from current season', action='store_true')
     parser_A_seasonal.add_argument('-y', '--year', help='Year.', type=int)
     parser_A_seasonal.add_argument('-e', '--season', help='Season.', choices=['winter', 'spring', 'summer', 'fall'])
 
@@ -28,11 +29,11 @@ def main():
 
     parser_A_top = subparser_A.add_parser('top', help='Fetch anime top.')
     parser_A_top.set_defaults(which='anime/top')
-    parser_A_top.add_argument('type', help='Filter top search.', choices=['upcoming', 'tv', 'movie', 'ova'])
+    parser_A_top.add_argument('type', help='Filter top search.', choices=['tv', 'movie', 'ova', 'ona', 'special', 'music'])
 
     parser_A_shedule = subparser_A.add_parser('schedule', help='Fetch anime schedule.')
-    parser_A_shedule.set_defaults(which='schedule')
-    parser_A_shedule.add_argument('day', help='Day of the week.', choices=['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'])
+    parser_A_shedule.set_defaults(which='anime/schedule')
+    parser_A_shedule.add_argument('-d','--day', help='Day of the week.', choices=['today', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'], default='today')
 
     parser_A_random = subparser_A.add_parser('random', help='Fetch random anime.')
     parser_A_random.set_defaults(which='anime/random')
